@@ -22,7 +22,7 @@ function setup(){
 
   handpose = ml5.handpose(video, options, modelReady);
 }
-
+ 
 function modelReady() {
   console.log("Model ready!");
   handpose.on('predict', results => {
@@ -57,3 +57,5 @@ function checknear() //check if the Z indexes are near eachother.
     }
 }
 setup();
+
+

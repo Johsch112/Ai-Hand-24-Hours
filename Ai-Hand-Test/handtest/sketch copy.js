@@ -22,7 +22,7 @@ function setup(){
 
   handpose = ml5.handpose(video, options, modelReady);
   colorMode(HSB);
-}
+} 
 
 function modelReady() {
   console.log("Model ready!");
