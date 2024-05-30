@@ -10,21 +10,25 @@ body {
   }
   
   #video{
+    
     transform: rotateY(180deg);
-    -webkit-transform:rotateY(180deg); /* Safari and Chrome */
-    -moz-transform:rotateY(180deg); /* Firefox */
-    position: absolute;
+    -webkit-transform:rotateY(180deg);
+    -moz-transform:rotateY(180deg); 
+    /*position: absolute;*/
     top: 0px;
     left: 0px;
     z-index:-1;
     border: 3px #fff solid;
       border-radius: 10px;
       opacity: 50%;
-      width: 1920px;
+      width: 640px;
+      height: 480px;
+      
   }
 
   #game {
-    width: 100%;
+    width: 100vw;
+    height: 100vh;
     position: relative;
     z-index: 2;
 
@@ -33,12 +37,17 @@ body {
 
 #aim {
   position: absolute;
-  width: 20px;
+  width: 36px;
   height: 20px;
-  background-color: blue;
+  background-image: url(image/AimingReticle.png);
   border-radius: 50%;
+  z-index: 100;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
-#enemy {
+
+
+.enemy {
   position: absolute;
   width: 100px;
   height: 100px;
@@ -49,9 +58,9 @@ body {
 #game.bang {
   border: 5px solid yellow;
 }
-#enemy.hit
+.enemy.hit
 {
-  width: 20px;
+  background-image: url(image/blood.png);
 }
 
 

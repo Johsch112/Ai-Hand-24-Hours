@@ -5,13 +5,15 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const video = document.getElementById("video"); //get vars
     const game = document.getElementById("game");
     const aim = document.getElementById("aim");
-    const enemy = document.getElementById("enemy");
+    const enemy = document.getElementsByClassName("enemy");
     const gunshot = new Audio('audio/Gunshot.mp3')
   
     function setup() {
         navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
             video.srcObject = stream;
             video.play();
+            console.log(video.clientWidth)
+            console.log(video.clientHeight)
         });
   
         const options = {
@@ -40,8 +42,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
     function draw() {
         const indexFingerTip = detections[0].annotations.indexFinger[3];
         //console.log("Index Finger Tip: ", indexFingerTip);
-        aim.style.left = `${indexFingerTip[0]}px`;
-        aim.style.top = `${indexFingerTip[1]}px`;
+        aim.style.left = `${(indexFingerTip[0]/640)*100}%`;
+        aim.style.top = `${(indexFingerTip[1]/480)*100}%`;
     }
   
     function checkhit() {
@@ -49,27 +51,23 @@ document.addEventListener('DOMContentLoaded', (event) => {
         const tolerance = 20; // Tolerance in pixels
   
         const aimLeft = indexFingerTip[0];
+      //  aimLeft = `${(indexFingerTip[0]/640)*100}%`;
         const aimTop = indexFingerTip[1];
+       // aimTop = `${(indexFingerTip[1]/480)*100}%`;
+        for(let i = 0; i <enemy.length; i++)
+            {
+                const enemyCord = enemy[i].getBoundingClientRect();
   
-        const enemyCord = enemy.getBoundingClientRect();
-  
-        const enemyLeft = enemyCord.left;
-        const enemyTop = enemyCord.top;
-        const enemyRight = enemyCord.right;
-        const enemyBottom = enemyCord.bottom;
-  
-        //console.log("Aim Position: ", { aimLeft, aimTop });
-        //console.log("Enemy Position: ", { enemyLeft, enemyTop, enemyRight, enemyBottom });
-  
-        if (aimLeft >= enemyLeft - tolerance && aimLeft <= enemyRight + tolerance &&
-            aimTop >= enemyTop - tolerance && aimTop <= enemyBottom + tolerance) {
-            //console.log("dead");
-            enemy.classList.add("hit");
-        }
-        else
-        {
-          enemy.classList.remove("hit");
-        }
+                const enemyLeft = enemyCord.left;
+                const enemyTop = enemyCord.top;
+                const enemyRight = enemyCord.right;
+                const enemyBottom = enemyCord.bottom;
+                if (aimLeft >= enemyLeft - tolerance && aimLeft <= enemyRight + tolerance &&
+                    aimTop >= enemyTop - tolerance && aimTop <= enemyBottom + tolerance) {
+                    //console.log("dead");
+                    enemy[i].classList.add("hit");
+                }
+            }
     }
   
     function checknear() {
@@ -117,7 +115,7 @@ function myTimer() {
     if (randomValue === 1 || secondsCounter >= 2) {
         const newZombie = document.createElement("enemy");
         newZombie.classList.add("zombie");
-        //  newZombie.classList.add("enemy");
+        newZombie.classList.add("enemy");
         newZombie.classList.add("ani"+getRandomInt(5));
         newZombie.style.top = Math.floor(Math.random() * vh) + 'px';
         newZombie.style.backgroundColor = getRandomColor(); 
