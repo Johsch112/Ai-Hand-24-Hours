@@ -1,5 +1,7 @@
 body {
    background-image: url(image/Frontyard.jpg);
+   
+   /* overflow: hidden; */
   }
   
   #canvas{
@@ -9,8 +11,73 @@ body {
     z-index:1;
   }
   
+  #start-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    backdrop-filter: blur(10px);
+    z-index: 10000;    
+}
+
+ 
+#start-screen img {
+     position: absolute;
+     width: 100%;
+     top: -340px;
+}
+
+#start-button {
+  font-family: arial black;
+  bottom: 0;
+    padding: 60px;
+    font-size: 80px;
+    border-radius: 60px;
+    border:3px white solid;
+    border-color: white solid 10px;
+    z-index: 1000;
+    position: absolute;
+    transition: all 0.5s ease;
+    background-color: rgb(0, 0, 0);
+    text-decoration: none;
+    color: white;
+}
+
+#start-button:hover {
+transform: scaleX(1.1);
+background-color: blue;
+}
+
+
+#start-button2 {
+  right: 0;
+  top: 0;
+  padding: 15px;
+  font-size: 40px;
+  border-radius: 60px;
+  border:3px white solid;
+  border-color: white solid 10px;
+  z-index: 301;
+  position: absolute;
+  transition: all 0.5s ease;
+  background-color: rgb(0, 0, 0);
+  text-decoration: none;
+  color: white;
+}
+
+#start-button2:hover {
+  transform: scaleX(1.1);
+  background-color: blue;
+  }
+
   #video{
-    z-index: 150;
+    z-index: 100000;
     transform: rotateY(180deg);
     -webkit-transform:rotateY(180deg);
     -moz-transform:rotateY(180deg); 
@@ -44,6 +111,18 @@ body {
   background-repeat: no-repeat;
 }
 
+#points{
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  border: 7px solid black;
+  font-family: arial black;
+  color: black;
+  font-size: 10vw;
+  position: absolute;
+  z-index: 300;
+  top: 0;
+  left: 0;
+}
 
 .enemy {
   position: absolute;
@@ -54,13 +133,33 @@ body {
   left: 100px;
 }
 #game.bang {
-  border: 5px solid yellow;
+  border: 5px solid transparent;
 }
 .enemy.hit
 {
   background-image: url(image/blood.png);
+  animation-play-state: paused;
 }
 
+
+#zombie2{
+  display: none;
+  top: 0;
+  right: 0;
+  z-index: 300;
+  position: absolute;
+}
+
+#zombie2 img{
+width: 500px;
+height: 500px;
+}
+
+#zombie2 h2{
+  background-color: white;
+  color: black;
+  height: 60px;
+  }
 
 .zombie {
   z-index: 1;

@@ -5,6 +5,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const game = document.getElementById("game");
     const aim = document.getElementById("aim");
     const gunshot = new Audio('audio/Gunshot.mp3');
+    const casinojingel = new Audio('audio/casino-jingel.mp3');
+    const jackpot = new Audio('audio/casinoljud.mp3');
+
+    let points = 0;
+    let checkpointreached = false;
 
     function setup() {
         navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
@@ -42,7 +47,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         const aimX = indexFingerTip[0] * scaleX + videoRect.left;
         const aimY = indexFingerTip[1] * scaleY + videoRect.top;
 
-        aim.style.left = `${aimX}px`;
+        aim.style.right = `${aimX}px`;
         aim.style.top = `${aimY}px`;
     }
 
@@ -60,9 +65,25 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 aimCenterY >= enemyRect.top - tolerance && aimCenterY <= enemyRect.bottom + tolerance) {
                 enemies[i].classList.add("hit");
                 console.log("Enemy hit!");
+                points = points + 1;
+                document.getElementById("points").innerHTML = points;
             }
         }
+
+        if (points > 200 && !checkpointreached) {
+            var zombie2Element = document.getElementById("zombie2");
+            if (zombie2Element) {
+                zombie2Element.style.display = "flex";
+                zombie2Element.style.justifyContent = "center";
+                zombie2Element.style.flexDirection = "row";
+            }
+            casinojingel.play();
+            jackpot.play();
+            checkpointreached = true;
+        }
     }
+
+
 
     function checknear() {
         const fingerX = detections[0].annotations.indexFinger[3][0];
@@ -87,7 +108,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
         function getRandomInt(max) {
             return Math.floor(Math.random() * max);
         }
-
         function getRandomColor() {
             const letters = '0123456789ABCDEF';
             let color = '#';
@@ -113,4 +133,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
             secondsCounter++;
         }
     }
+
+
 });
