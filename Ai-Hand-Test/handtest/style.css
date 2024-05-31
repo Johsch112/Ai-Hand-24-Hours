@@ -10,20 +10,18 @@ body {
   }
   
   #video{
-    
+    z-index: 150;
     transform: rotateY(180deg);
     -webkit-transform:rotateY(180deg);
     -moz-transform:rotateY(180deg); 
-    /*position: absolute;*/
+    position: absolute;
     top: 0px;
     left: 0px;
-    z-index:-1;
     border: 3px #fff solid;
       border-radius: 10px;
-      opacity: 50%;
-      width: 640px;
-      height: 480px;
-      
+      opacity: 1%;
+      width: 1920px;
+      height: 1080px;
   }
 
   #game {
